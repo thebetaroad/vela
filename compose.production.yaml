@@ -1,0 +1,25 @@
+name: goatcounter
+
+services:
+  vela:
+    build: .
+    image: vela:local
+    init: true
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:8080:8080'
+    volumes:
+      - goatcounter-data:/home/goatcounter/goatcounter-data
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://127.0.0.1:8080/status']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  goatcounter-data: {}
