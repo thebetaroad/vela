@@ -28,6 +28,13 @@ The following settings are supported:
 | `allow_local` | Allow requests from local addresses (`localhost`, `192.168.0.0`, etc.) for testing the integration locally.  |
 | `allow_frame` | Allow requests when the page is loaded in a frame or iframe.                                                 |
 | `endpoint`    | Customize the endpoint for sending pageviews to (overrides the URL in `data-goatcounter`). Only useful if you have `no_onload`. |
+| `track_query` | Send the current page query string for page and campaign attribution. Disabled by default to avoid transmitting or storing tokens and personal data embedded in URLs. |
+
+By default, query strings are neither sent nor stored. Set `track_query` to `true` only when your site needs query-based page statistics or campaign attribution; ensure those parameters never contain personal data or secrets.
+
+This setting is available in the current `count.js` script. Frozen SRI scripts `count.v1.js` through `count.v5.js` keep their historical behavior; switch to `count.js` to avoid sending query strings by default.
+
+
 
 For example, to allow requests from local sources with:
 `data-goatcounter-settings`:

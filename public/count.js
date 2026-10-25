@@ -11,7 +11,7 @@
 		try         { var set = JSON.parse(s.dataset.goatcounterSettings) }
 		catch (err) { console.error('invalid JSON in data-goatcounter-settings: ' + err) }
 		for (var k in set)
-			if (['no_onload', 'no_events', 'allow_local', 'allow_frame', 'path', 'title', 'referrer', 'event'].indexOf(k) > -1)
+			if (['no_onload', 'no_events', 'allow_local', 'allow_frame', 'path', 'title', 'referrer', 'event', 'track_query'].indexOf(k) > -1)
 				window.goatcounter[k] = set[k]
 	}
 
@@ -27,7 +27,7 @@
 			e: !!(vars.event || goatcounter.event),
 			s: window.screen.width,
 			b: is_bot(),
-			q: location.search,
+			q: (goatcounter.track_query ? location.search : ''),
 		}
 
 		var rcb, pcb, tcb  // Save callbacks to apply later.
@@ -96,7 +96,7 @@
 			if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
 				loc = a
 		}
-		return (loc.pathname + loc.search) || '/'
+		return (loc.pathname + (goatcounter.track_query ? loc.search : '')) || '/'
 	}
 
 	// Run function after DOM is loaded.

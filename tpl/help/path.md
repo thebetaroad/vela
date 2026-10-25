@@ -1,6 +1,4 @@
-Sometimes you want to send a different path to GoatCounter than what appears in
-the browser's URL bar; removing one or more query parameters are a common
-scenario.
+Query strings are not sent by default, so secrets and personal data in URLs are not transmitted or stored. If your site needs query parameters for page statistics or campaign attribution, opt in with `track_query: true` in `data-goatcounter-settings`; ensure those values contain no personal data or secrets. You can also send an explicit path after removing sensitive parameters.
 
 Using a canonical URL
 ---------------------

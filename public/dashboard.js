@@ -160,6 +160,7 @@
 		data['period-start'] = $('#period-start').val()
 		data['period-end']   = $('#period-end').val()
 		data['filter']       = $('#filter-paths').val()
+		data['section']      = $('input[name=section]').val()
 		return data
 	}
 

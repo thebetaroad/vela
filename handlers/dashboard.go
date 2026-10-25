@@ -136,7 +136,33 @@ func (h backend) dashboard(w http.ResponseWriter, r *http.Request) error {
 	for _, w := range wid.Get("totalpages") {
 		wid.GetOne("totalcount").(*widgets.TotalCount).NoEvents = w.Settings()["no-events"].Value.(bool)
 	}
-
+	section := q.Get("section")
+	if section != "" {
+		switch section {
+		case "pages", "toprefs", "campaigns", "browsers", "systems", "locations", "languages", "sizes", "totalpages":
+		default:
+			return guru.New(http.StatusNotFound, "unknown dashboard section")
+		}
+		selected := wid.Get(section)
+		if len(selected) == 0 {
+			widget := widgets.NewWidget(r.Context(), section, 999)
+			widget.SetSettings(goatcounter.Widget{"n": section}.GetSettings(r.Context()))
+			selected = widgets.List{widget}
+		}
+		for _, widget := range selected {
+			settings := widget.Settings()
+			switch section {
+			case "pages":
+				settings["limit_pages"] = goatcounter.WidgetSetting{Value: float64(100)}
+				settings["limit_refs"] = goatcounter.WidgetSetting{Value: float64(20)}
+			case "totalpages", "sizes":
+			default:
+				settings["limit"] = goatcounter.WidgetSetting{Value: float64(20)}
+			}
+			widget.SetSettings(settings)
+		}
+		wid = append(wid.Get("totalcount"), selected...)
+	}
 	initial := wid
 	var lazy widgets.List
 	if useWebsocket(r) {
@@ -279,9 +305,10 @@ func (h backend) dashboard(w http.ResponseWriter, r *http.Request) error {
 		Total       int
 		TotalUTC    int
 		ConnectID   zint.Uint128
+		Section     string
 	}{newGlobals(w, r), cd, subs, showRefs, rng,
 		args.PathFilter, allowGroups, wid, view, shared.Total, shared.TotalUTC,
-		connectID})
+		connectID, section})
 }
 
 func (h backend) loadWidget(w http.ResponseWriter, r *http.Request) error {

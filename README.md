@@ -1,3 +1,11 @@
+# Vela
+
+Vela is a privacy-first evolution of [GoatCounter](https://github.com/arp242/goatcounter), preserving its lightweight, cookieless tracking and existing integrations while refreshing the dashboard. This fork keeps the upstream code and migration formats as its compatibility base; new product features will be added only when their data collection remains proportionate and transparent, including for websites used by minors.
+
+## Vela release
+
+See [RELEASE.md](RELEASE.md) for Docker deployment, database backup, and GoatCounter migration steps.
+
 GoatCounter is an open source web analytics platform available as a (free)
 hosted service or self-hosted app. It aims to offer easy to use and meaningful
 privacy-friendly web analytics as an alternative to Google Analytics or Matomo.

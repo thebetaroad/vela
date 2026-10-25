@@ -42,7 +42,7 @@ services:
   goatcounter-sqlite:
     profiles:   ['goatcounter-sqlite']
     build:      {context: '.'}
-    image:      'arp242/goatcounter:latest'
+    image:      'vela:local'
     ports:      ['127.0.0.1:8080:8080']
     volumes:    ['goatcounter-data:/home/goatcounter/goatcounter-data']
 
@@ -51,7 +51,7 @@ services:
   goatcounter-postgres:
     profiles:   ['goatcounter-postgres']
     build:      {context: '.'}
-    image:      'arp242/goatcounter:latest'
+    image:      'vela:local'
     depends_on: ['postgres']
     ports:      ['127.0.0.1:8080:8080']
     volumes:    ['goatcounter-data:/home/goatcounter/goatcounter-data']

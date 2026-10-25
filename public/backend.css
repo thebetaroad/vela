@@ -431,3 +431,34 @@ input:user-invalid { outline: 1px solid #f00 !important; box-shadow: 0 0 .2em #f
     /* Print background colours for charts */
     canvas, .hchart .bar { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
 }
+
+/* Vela dashboard refresh: retain GoatCounter's existing widgets and controls. */
+.vela-header { display:flex; align-items:center; justify-content:space-between; max-width:78rem; margin:0 auto 1.2rem; padding:.35rem .2rem; }
+.vela-brand { color:var(--vela-text); font-size:1.3rem; font-weight:750; letter-spacing:-.04em; text-decoration:none; }
+.vela-brand-mark { display:inline-grid; place-items:center; width:2rem; height:2rem; margin-right:.5rem; border-radius:.65rem; background:var(--vela-soft); color:var(--vela-link); }
+.vela-note { color:var(--vela-muted); font-size:.85rem; }
+body#page-dashboard .page { max-width:78rem; padding:1.5rem 2rem; border:1px solid var(--vela-border); border-radius:18px; box-shadow:0 12px 36px #19382b0d; }
+body#page-dashboard .page h1, body#page-dashboard .page h2 { color:var(--vela-text); }
+body#page-dashboard #dash-main { gap:1rem; padding:1rem 1.2rem; border:1px solid var(--vela-border); border-radius:12px; background:var(--vela-bg); }
+body#page-dashboard #dash-main > div { line-height:2.2; }
+body#page-dashboard #dash-timerange { color:var(--vela-text); font-weight:700; }
+body#page-dashboard #dash-move { padding:.6rem .8rem; border:1px solid var(--vela-border); border-radius:10px; background:var(--vela-soft); }
+body#page-dashboard .widget-header { align-items:baseline; border-bottom:1px solid var(--vela-border); }
+body#page-dashboard .totals, body#page-dashboard .pages-list, body#page-dashboard .widget { margin:1rem 0; padding:1.2rem; border:1px solid var(--vela-border); border-radius:12px; background:var(--vela-bg); box-shadow:0 3px 12px #19382b08; }
+body#page-dashboard .count-list tr:hover { background:var(--vela-hover); }
+body#page-dashboard a, body#page-dashboard button.link { color:var(--vela-link); }
+body#page-dashboard button:focus-visible, body#page-dashboard a:focus-visible, body#page-dashboard input:focus-visible { outline:3px solid #70c69b; outline-offset:2px; }
+@media(max-width:48rem) {
+ body#page-dashboard .page { padding:.8rem; border-radius:0; }
+ body#page-dashboard #dash-main { display:block; }
+ body#page-dashboard #dash-main > div { margin:.5rem 0; text-align:left !important; }
+ body#page-dashboard .totals, body#page-dashboard .pages-list, body#page-dashboard .widget { padding:.8rem; }
+ .vela-header { align-items:flex-start; flex-direction:column; gap:.5rem; padding:.2rem .8rem; }
+}
+
+.vela-sections { display:flex; flex-wrap:wrap; gap:.35rem; max-width:78rem; margin:0 auto 1rem; padding:.35rem; border:1px solid var(--vela-border); border-radius:12px; background:var(--vela-bg); }
+.vela-sections a { padding:.55rem .8rem; border-radius:8px; color:var(--vela-muted); text-decoration:none; font-size:.9rem; }
+.vela-sections a:hover, .vela-sections a[aria-current="page"] { background:var(--vela-soft); color:var(--vela-link); }
+.vela-content.vela-detail .hcharts > div { width:100%; }
+.vela-content.vela-detail .pages-list { min-height:24rem; }
+.vela-theme { color:var(--vela-link); font-size:.85rem; text-decoration:none; }

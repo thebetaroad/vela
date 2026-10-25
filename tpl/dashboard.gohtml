@@ -1,7 +1,22 @@
 {{- template "_backend_top.gohtml" . -}}
 
+<header class="vela-header"><a class="vela-brand" href="{{.Base}}/"><span class="vela-brand-mark">↗</span>Vela</a><span class="vela-note">Nessun cookie; verifica i dati raccolti nelle impostazioni del sito.</span><a class="vela-theme" href="{{.Base}}/user/pref">{{.T "label/theme|Theme"}}</a></header>
+<nav class="vela-sections" aria-label="Analytics sections">
+	<a href="{{.Base}}/" {{if not .Section}}aria-current="page"{{end}}>{{.T "vela/nav/overview|Overview"}}</a>
+	<a href="{{.Base}}/?section=totalpages" {{if eq .Section "totalpages"}}aria-current="page"{{end}}>{{.T "vela/nav/trends|Trends"}}</a>
+	<a href="{{.Base}}/?section=pages" {{if eq .Section "pages"}}aria-current="page"{{end}}>{{.T "vela/nav/pages|Pages"}}</a>
+	<a href="{{.Base}}/?section=toprefs" {{if eq .Section "toprefs"}}aria-current="page"{{end}}>{{.T "vela/nav/referrers|Referrers"}}</a>
+	<a href="{{.Base}}/?section=campaigns" {{if eq .Section "campaigns"}}aria-current="page"{{end}}>{{.T "vela/nav/campaigns|Campaigns"}}</a>
+	<a href="{{.Base}}/?section=browsers" {{if eq .Section "browsers"}}aria-current="page"{{end}}>{{.T "vela/nav/browsers|Browsers"}}</a>
+	<a href="{{.Base}}/?section=systems" {{if eq .Section "systems"}}aria-current="page"{{end}}>{{.T "vela/nav/systems|Systems"}}</a>
+	<a href="{{.Base}}/?section=locations" {{if eq .Section "locations"}}aria-current="page"{{end}}>{{.T "vela/nav/locations|Locations"}}</a>
+	<a href="{{.Base}}/?section=languages" {{if eq .Section "languages"}}aria-current="page"{{end}}>{{.T "vela/nav/languages|Languages"}}</a>
+	<a href="{{.Base}}/?section=sizes" {{if eq .Section "sizes"}}aria-current="page"{{end}}>{{.T "vela/nav/sizes|Screen sizes"}}</a>
+</nav>
+<div class="vela-content{{if .Section}} vela-detail{{end}}" data-section="{{.Section}}">
+
 <div id="print-header">
-	GoatCounter report for {{tformat .Period.Start "" .User}} to {{tformat .Period.End "" .User}}
+	Vela report for {{tformat .Period.Start "" .User}} to {{tformat .Period.End "" .User}}
 </div>
 
 {{if .User.ID}}
@@ -56,6 +71,7 @@
 	{{/* The first button gets used on the enter key, AFAICT there is no way to change that. */}}
 	<button type="submit" tabindex="-1" class="hide-btn" aria-label="{{.T "button/submit|Submit"}}"></button>
 	{{if .ShowRefs}}<input type="hidden" name="showrefs" value="{{.ShowRefs}}">{{end}}
+	<input type="hidden" name="section" value="{{.Section}}">
 	<input type="hidden" id="hl-period" name="hl-period" value="{{.View.Period}}" disabled>
 	<input type="hidden" id="hl-group" name="group" value="{{.View.Group}}" disabled>
 
@@ -176,5 +192,6 @@
 <span class="hide" id="js-connect-id">{{.ConnectID}}</span>
 
 {{template "_dashboard_widgets.gohtml" .}}
+</div> {{/* .vela-content */}}
 
 {{- template "_backend_bottom.gohtml" . }}
