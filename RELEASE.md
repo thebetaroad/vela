@@ -43,7 +43,7 @@ The current `count.js` does not send query strings unless `track_query: true` is
 
 ## Reverse proxy, health, and privacy
 
-Preserve the original `Host` header and configure forwarded IP headers as documented for GoatCounter before enabling IP-based features. The health endpoint is `/status`; check it after deployment and monitor container restarts and logs. Keep credentials out of source control and restrict access to the analytics dashboard.
+Preserve the original `Host` header and configure forwarded IP headers as documented for GoatCounter before enabling IP-based features. The health endpoint is `/status`; the Compose health check calls it through the local port. Block `/status` at the public reverse proxy because its response includes runtime and database version details. Check health after deployment and monitor container restarts and logs. Keep credentials out of source control and restrict access to the analytics dashboard.
 
 The analytics service does not use cookies for visitor tracking. Its current visit counting temporarily uses IP and User-Agent in memory, while path names, referrers, event names, and campaign values can still reveal personal information if the site sends it. For sites visited by minors, review data collection, URL and event contents, retention, public dashboard access, and applicable legal requirements before enabling production collection. Privacy-friendly analytics does not by itself guarantee compliance in every jurisdiction or configuration.
 
